@@ -125,7 +125,7 @@ const qe = {
   version: "3.7.0.19",
   bundleId: "blu.saman.solutions"
 };
-const Ve = {
+const AppRoutes = {
   chat: {
     root: "/chat",
     guest: "/chat/guest",
@@ -1145,14 +1145,14 @@ class tt extends Ge.bluebank.ContactCardSource {
 }
 class at extends Ge.base.Password {
   static async fromEntity(_0x1f701c) {
-    const _0x2a4246 = await C_.bluEncrypt(_0x1f701c, await A_.getAesKey());
+    const _0x2a4246 = await BluCrypto.bluEncrypt(_0x1f701c, await KeyStore.getAesKey());
     return _0x1f701c && {
       encoded: _0x2a4246
     };
   }
   static async toEntity(_0x156176) {
     var _0x55f37a;
-    const _0x37d661 = Boolean((_0x55f37a = _0x156176 == null ? undefined : _0x156176.encoded) == null ? undefined : _0x55f37a.length) && (await C_.bluDecrypt(_0x156176.encoded, await A_.getAesKey()));
+    const _0x37d661 = Boolean((_0x55f37a = _0x156176 == null ? undefined : _0x156176.encoded) == null ? undefined : _0x55f37a.length) && (await BluCrypto.bluDecrypt(_0x156176.encoded, await KeyStore.getAesKey()));
     const _0x3fdaac = _0x37d661 && new TextDecoder().decode(_0x37d661);
     return _0x156176 && _0x3fdaac;
   }
@@ -2302,7 +2302,7 @@ class fa {
 }
 function Aa() {
   const _0x5af6c4 = fa.getInstance();
-  const _0x78c2df = new __({
+  const _0x78c2df = new ApiService({
     domainService: fA,
     accountProfileService: _0x5af6c4
   });
@@ -2872,7 +2872,7 @@ class ja {
 }
 function Fa() {
   const _0x5e19ee = fa.getInstance();
-  const _0x4dfe61 = new __({
+  const _0x4dfe61 = new ApiService({
     domainService: wp,
     accountProfileService: _0x5e19ee
   });
@@ -3191,7 +3191,7 @@ class tn {
 }
 function an(_0x2c4f8c) {
   const _0x9e73c6 = fa.getInstance();
-  const _0x1896c9 = new __({
+  const _0x1896c9 = new ApiService({
     domainService: pm,
     options: {
       requestId: _0x2c4f8c
@@ -3500,7 +3500,7 @@ class dn {
 }
 function pn() {
   const _0xc55472 = fa.getInstance();
-  const _0x107ab9 = new __({
+  const _0x107ab9 = new ApiService({
     domainService: lp,
     accountProfileService: _0xc55472
   });
@@ -3988,15 +3988,15 @@ class Vn {
   }
 }
 function Gn(_0x57eea8) {
-  const _0x27251a = new __({
+  const _0x27251a = new ApiService({
     domainService: nd,
     options: _0x57eea8
   });
-  return new Un(_0x27251a, A_, C_);
+  return new Un(_0x27251a, KeyStore, BluCrypto);
 }
 function Yn(_0x3bf6ce) {
   const _0x444e44 = Gn(_0x3bf6ce);
-  return new Vn(_0x444e44, A_);
+  return new Vn(_0x444e44, KeyStore);
 }
 const zn = () => Yn().getDeviceId();
 const Hn = "REGISTER_PHONE_QUERY";
@@ -4356,7 +4356,7 @@ class ai {
 }
 function ni() {
   const _0xfeb3db = fa.getInstance();
-  const _0x5d078d = new __({
+  const _0x5d078d = new ApiService({
     domainService: Sd,
     accountProfileService: _0xfeb3db
   });
@@ -4654,7 +4654,7 @@ class Ei {
       region: (_0x32c350 = (_0x53447e = ot((_0x580e95 = _0x2317c5 == null ? undefined : _0x2317c5.user) == null ? undefined : _0x580e95.locations)) == null ? undefined : _0x53447e.address) == null ? undefined : _0x32c350.stateProvince,
       occupation: (_0x2e5347 = _0x2317c5 == null ? undefined : _0x2317c5.user) == null ? undefined : _0x2e5347.occupation.rawValue,
       hashedPhone: _0x2317c5 == null ? undefined : _0x2317c5.encryptedPhoneNumber,
-      cardOrdered: !((_0x24a51c = location == null ? undefined : location.pathname) == null ? undefined : _0x24a51c.includes(Ve.login.root))
+      cardOrdered: !((_0x24a51c = location == null ? undefined : location.pathname) == null ? undefined : _0x24a51c.includes(AppRoutes.login.root))
     };
     Object.keys(_0x36b01d).forEach(_0x49d564 => {
       if (_0x36b01d[_0x49d564]) {
@@ -5982,7 +5982,7 @@ function qo(_0x22a20b, _0x56e450) {
         redirect_link: _0x1595ff
       });
       const _0x2d8917 = {
-        pathname: Ve.switchAccount.root,
+        pathname: AppRoutes.switchAccount.root,
         search: "?" + _0x210fdc.toString()
       };
       _0x505317.path = "" + _0x2d8917.pathname + _0x2d8917.search;
@@ -17778,7 +17778,7 @@ class LN {
 }
 function MN() {
   const _0x1ca594 = fa.getInstance();
-  const _0x2782c4 = new __({
+  const _0x2782c4 = new ApiService({
     domainService: av,
     accountProfileService: _0x1ca594
   });
@@ -18007,7 +18007,7 @@ class WN {
 }
 const QN = _0x149027 => {
   const _0x3e5281 = fa.getInstance();
-  const _0x289bf1 = new __({
+  const _0x289bf1 = new ApiService({
     domainService: MT,
     options: _0x149027,
     accountProfileService: _0x3e5281
@@ -18359,14 +18359,15 @@ const y_ = {
   [CN.CARD_STATUS_EXPEDITE]: "Expedite",
   [CN.CARD_STATUS_UNSPECIFIED]: "Unspecified"
 };
-const v_ = [Ve.payment.hub, Ve.dashboard.root, Ve.settings.root, Ve.transfer.root, Ve.card.root];
+const v_ = [AppRoutes.payment.hub, AppRoutes.dashboard.root, AppRoutes.settings.root, AppRoutes.transfer.root, AppRoutes.card.root];
 const g_ = "main";
 var E_ = (_0x22ff51 => {
   _0x22ff51[_0x22ff51.JUNIOR = 0] = "JUNIOR";
   _0x22ff51[_0x22ff51.SELF = 1] = "SELF";
   return _0x22ff51;
 })(E_ || {});
-const h_ = async () => {
+// REFACTORED: Derives a device-bound AES-GCM key using PBKDF2 on the device identifier and user agent.
+const deriveKeyFromPassword = async () => {
   const _0x2e91eb = new TextEncoder().encode(zn().string);
   const _0x176124 = await al.subtle.importKey("raw", _0x2e91eb, {
     name: "PBKDF2"
@@ -18384,7 +18385,8 @@ const h_ = async () => {
 const T_ = "%2";
 const b_ = "%3";
 const f_ = "keyPair";
-const A_ = (() => {
+// REFACTORED: Manages ECDH key pairs and shared secrets in local storage.
+const KeyStore = (() => {
   let _0x501131 = null;
   let _0x5a9865 = null;
   let _0x2c04a9 = null;
@@ -18395,7 +18397,7 @@ const A_ = (() => {
     }
     const _0x2158fd = new Uint8Array(Zo(_0x152b4f));
     return await (async (_0x5f4189, _0x5de7dd = 12) => {
-      const _0x12afd6 = await h_();
+      const _0x12afd6 = await deriveKeyFromPassword();
       if (!_0x5f4189) {
         return null;
       }
@@ -18422,7 +18424,7 @@ const A_ = (() => {
   }
   async function _0x19ad2c(_0x372a52) {
     const _0x5b48d8 = await (async (_0xd320c4, _0x16bc38 = 12) => {
-      const _0x5a14ca = await h_();
+      const _0x5a14ca = await deriveKeyFromPassword();
       const _0x13de70 = al.getRandomValues(new Uint8Array(_0x16bc38));
       const _0xeea100 = await al.subtle.wrapKey("jwk", _0xd320c4, _0x5a14ca, {
         name: "AES-GCM",
@@ -18557,9 +18559,10 @@ async function S_(_0x58fe41) {
       _0x1996bc = new TextEncoder().encode(_0x1996bc);
     }
     return Jo(await al.subtle.sign("HMAC", _0x2740e2, _0x1996bc), "base64URI");
-  }(_0x58fe41, await A_.getHmacKey());
+  }(_0x58fe41, await KeyStore.getHmacKey());
 }
-async function I_({
+// REFACTORED: Builds standard request headers including the x-jws-signature when authentication is required.
+async function generateSecurityHeaders({
   binaryData: _0x4985bc,
   requestId: _0x3da7ad,
   isPublicService: _0x144e3b = false
@@ -18603,7 +18606,7 @@ async function I_({
   return _0x12eb9c;
 }
 const N_ = /^[^/]*\//;
-class __ {
+class ApiService {
   constructor({
     domainService: _0x38f5b6,
     accountProfileService: _0x1c3dc3,
@@ -18682,7 +18685,7 @@ class __ {
     var _0x27d328;
     var _0x3ffcec;
     if ((_0x9c97f7 == null ? undefined : _0x9c97f7.status) === 401) {
-      setTimeout(() => Tl(Ve.login.root));
+      setTimeout(() => Tl(AppRoutes.login.root));
       throw _0x9c97f7.data;
     }
     const _0x43871a = {};
@@ -18731,7 +18734,7 @@ class __ {
     var _0x564dbc;
     var _0x4619da;
     return {
-      ...(await I_({
+      ...(await generateSecurityHeaders({
         binaryData: _0x996531,
         isPublicService: this.options.isPublicService,
         requestId: a84_0x305dd4(this.options.requestId)
@@ -18779,7 +18782,8 @@ class __ {
     }
   }
 }
-const C_ = {
+// REFACTORED: Provides AES-GCM encryption/decryption helpers for Blu payloads.
+const BluCrypto = {
   async bluEncrypt(_0x38e127, _0x2568bf, _0x1aea51 = 12) {
     if (!_0x38e127) {
       console.warn("bluEncrypt: Text is not passed for encryption.");
@@ -18853,7 +18857,7 @@ const D_ = {
     let _0x53c490;
     let _0x40ac77;
     try {
-      _0xb5df23 = await I_({
+      _0xb5df23 = await generateSecurityHeaders({
         binaryData: new TextEncoder().encode(_0x43f947.body),
         requestId: a84_0x547da4(),
         isPublicService: !Oo()
@@ -19978,7 +19982,7 @@ class aC {
     return this.generalRepository.getOnboardingSlides(_0x4cc768).then(_0xf6392b => (_0xf6392b == null ? undefined : _0xf6392b.onboardingSlides) && Promise.all(_0xf6392b.onboardingSlides.map(async _0xee9230 => {
       var _0x165e82;
       if (((_0x165e82 = _0xee9230 == null ? undefined : _0xee9230.htmlUrl) == null ? undefined : _0x165e82.absoluteString) && (_0xee9230 == null ? undefined : _0xee9230.authenticationNeeded)) {
-        const _0x914415 = await this.generalRepository.getStringifiedHtml(_0xee9230.htmlUrl.absoluteString, await I_({
+        const _0x914415 = await this.generalRepository.getStringifiedHtml(_0xee9230.htmlUrl.absoluteString, await generateSecurityHeaders({
           binaryData: new Uint8Array(),
           requestId: a84_0x305dd4(new Uint8Array(a84_0x1699de(a84_0x547da4()))),
           isPublicService: false
@@ -20006,7 +20010,7 @@ class aC {
 }
 const nC = _0x211728 => {
   const _0x34e175 = fa.getInstance();
-  const _0x498847 = new __({
+  const _0x498847 = new ApiService({
     domainService: lu,
     options: _0x211728,
     accountProfileService: _0x34e175
@@ -20704,9 +20708,9 @@ const FC = ({
     icon: "Chat",
     onClick: () => {
       if (Oo()) {
-        _0x5ab97f.push(Ve.chat.private);
+        _0x5ab97f.push(AppRoutes.chat.private);
       } else {
-        _0x5ab97f.push(Ve.chat.guest);
+        _0x5ab97f.push(AppRoutes.chat.guest);
       }
     }
   }, {
@@ -21489,7 +21493,7 @@ const _Component62 = () => {
   const {
     pathname: _0x21e56c
   } = a84_0x128389();
-  if (_0x21e56c === Ve.addToHomeScreen) {
+  if (_0x21e56c === AppRoutes.addToHomeScreen) {
     return <_Component7 />;
   } else {
     return <_Component8 />;
@@ -23136,7 +23140,7 @@ class LD {
 }
 function MD(_0xe289ee) {
   const _0x15fed3 = fa.getInstance();
-  const _0x4d5741 = new __({
+  const _0x4d5741 = new ApiService({
     domainService: Mg,
     options: {
       requestId: _0xe289ee
@@ -24058,7 +24062,7 @@ class xP {
 }
 function RP() {
   const _0x1359fc = fa.getInstance();
-  const _0x33596d = new __({
+  const _0x33596d = new ApiService({
     domainService: Mf,
     accountProfileService: _0x1359fc
   });
@@ -24182,44 +24186,44 @@ const VP = _0x26d0a2 => a84_0x21a5e8(_0x458795 => RP().SubmitFundOrder({
   } : {})
 }), _0x26d0a2);
 const GP = new Map([["kyc", {
-  path: Ve.kyc.adult.root
+  path: AppRoutes.kyc.adult.root
 }], ["kyc/intro", {
-  path: Ve.kyc.adult.intro
+  path: AppRoutes.kyc.adult.intro
 }], ["kyc/junior-welcome", {
-  path: Ve.kyc.adult.juniorWelcome
+  path: AppRoutes.kyc.adult.juniorWelcome
 }], ["settings/kyc", {
-  path: Ve.kyc.adult.root,
+  path: AppRoutes.kyc.adult.root,
   data: {
     flow: "change-identity"
   }
 }], ["kyc/notarization/waiting", {
-  path: Ve.kyc.adult.notarizationWaiting
+  path: AppRoutes.kyc.adult.notarizationWaiting
 }], ["kyc/account/reopen", {
-  path: Ve.reopenAccount.root
+  path: AppRoutes.reopenAccount.root
 }], ["kyc/profile/address", {
   path: "",
   data: {
     currentStepId: "documents"
   }
 }], ["kyc/duplicate-national-id", {
-  path: Ve.kyc.adult.nationalCodeAlreadyExists
+  path: AppRoutes.kyc.adult.nationalCodeAlreadyExists
 }], ["kyc/junior-signup-confirmation", {
-  path: Ve.kyc.adult.juniorFarewell
+  path: AppRoutes.kyc.adult.juniorFarewell
 }], ["transfer/main", {
-  path: Ve.transfer.root
+  path: AppRoutes.transfer.root
 }], ["transfer/occurence-type", {
-  path: Ve.transfer.selectMethod
+  path: AppRoutes.transfer.selectMethod
 }], ["transfer/new-destination", {
-  path: Ve.transfer.newDestination
+  path: AppRoutes.transfer.newDestination
 }], ["transfer/amount-entry", {
-  path: Ve.transfer.amount
+  path: AppRoutes.transfer.amount
 }], ["transfer/inquiry", {
-  path: Ve.transfer.highCap.verifyAndTransfer,
+  path: AppRoutes.transfer.highCap.verifyAndTransfer,
   paramsMap: {
     occurrenceID: "occurrenceId"
   }
 }], ["dashboard/main", {
-  path: Ve.dashboard.root,
+  path: AppRoutes.dashboard.root,
   paramsMap: {
     "announce-type": "announceType",
     "announce-message": "announceMessage",
@@ -24229,414 +24233,414 @@ const GP = new Map([["kyc", {
     "presentation-profile-id": "presentationProfileId"
   }
 }], ["dashboard/transaction/details", {
-  path: Ve.dashboard.root
+  path: AppRoutes.dashboard.root
 }], ["dashboard/deposit-funding", {
-  path: Ve.topUp.root
+  path: AppRoutes.topUp.root
 }], ["dashboard/analytics", {
-  path: Ve.dashboard.analytics.root
+  path: AppRoutes.dashboard.analytics.root
 }], ["dashboard/inbox", {
-  path: Ve.inbox.root
+  path: AppRoutes.inbox.root
 }], ["dashboard/transaction/export", {
-  path: Ve.dashboard.requestPdf
+  path: AppRoutes.dashboard.requestPdf
 }], ["device-verify", {
-  path: Ve.deviceVerify.root
+  path: AppRoutes.deviceVerify.root
 }], ["login/device-verify", {
-  path: Ve.deviceVerify.root
+  path: AppRoutes.deviceVerify.root
 }], ["support/authorized-chat", {
-  path: Ve.chat.private
+  path: AppRoutes.chat.private
 }], ["login/password-change", {
-  path: Ve.forceActions.changePassword.root
+  path: AppRoutes.forceActions.changePassword.root
 }], ["payment/main", {
-  path: Ve.payment.hub
+  path: AppRoutes.payment.hub
 }], ["payment/bill-list", {
-  path: Ve.payment.bill.root
+  path: AppRoutes.payment.bill.root
 }], ["payment/bill/details", {
-  path: Ve.payment.bill.detail,
+  path: AppRoutes.payment.bill.detail,
   paramsMap: {
     phone_number: "phoneNumber",
     bill_id: "billId"
   }
 }], ["payment/mobile-charge-list", {
-  path: Ve.payment.charge.root
+  path: AppRoutes.payment.charge.root
 }], ["payment/internet-package-list", {
-  path: Ve.payment.internet.root
+  path: AppRoutes.payment.internet.root
 }], ["recovery/password/notarization/intro", {
-  path: Ve.recovery.password.notarizationIntro
+  path: AppRoutes.recovery.password.notarizationIntro
 }], ["recovery/password/success", {
-  path: Ve.recovery.password.inComplete
+  path: AppRoutes.recovery.password.inComplete
 }], ["recovery/pending-recovery-request", {
-  path: Ve.recovery.password.pending
+  path: AppRoutes.recovery.password.pending
 }], ["settings/main", {
-  path: Ve.settings.root
+  path: AppRoutes.settings.root
 }], ["settings/referral", {
-  path: Ve.settings.referral.root
+  path: AppRoutes.settings.referral.root
 }], ["referral/transaction-list", {
-  path: Ve.settings.referral.transactionList
+  path: AppRoutes.settings.referral.transactionList
 }], ["settings/security/password", {
-  path: Ve.settings.security.changePassword
+  path: AppRoutes.settings.security.changePassword
 }], ["settings/profile/phone", {
-  path: Ve.settings.userAccount.changePhoneNumber
+  path: AppRoutes.settings.userAccount.changePhoneNumber
 }], ["settings/profile/address", {
-  path: Ve.settings.userAccount.changeAddress.postalCode
+  path: AppRoutes.settings.userAccount.changeAddress.postalCode
 }], ["settings/devices", {
-  path: Ve.settings.security.devices
+  path: AppRoutes.settings.security.devices
 }], ["settings/notification-settings", {
-  path: Ve.settings.notification
+  path: AppRoutes.settings.notification
 }], ["settings/transaction-pin", {
-  path: Ve.settings.security.transactionPin.root
+  path: AppRoutes.settings.security.transactionPin.root
 }], ["settings/transaction-pin/recovery/verify", {
-  path: Ve.settings.security.transactionPin.otpCode
+  path: AppRoutes.settings.security.transactionPin.otpCode
 }], ["settings/account-details", {
-  path: Ve.settings.root,
+  path: AppRoutes.settings.root,
   data: {
     account_detail: "true"
   }
 }], ["settings/profile/avatar/ready", {
-  path: Ve.settings.avatar.confirmation,
+  path: AppRoutes.settings.avatar.confirmation,
   data: {
     avatar_id: "avatarId"
   }
 }], ["login/main", {
-  path: Ve.login.root
+  path: AppRoutes.login.root
 }], ["login/closed-account", {
-  path: Ve.login.closedAccountReasons
+  path: AppRoutes.login.closedAccountReasons
 }], ["login/recovery-options", {
-  path: Ve.recovery.options
+  path: AppRoutes.recovery.options
 }], ["login/phone-change", {
-  path: Ve.forceActions.changePhoneNumber.root
+  path: AppRoutes.forceActions.changePhoneNumber.root
 }], ["login/phone-change/notarization/intro", {
-  path: Ve.recovery.changePhoneNumber.notarizationIntro
+  path: AppRoutes.recovery.changePhoneNumber.notarizationIntro
 }], ["card/main", {
-  path: Ve.card.root
+  path: AppRoutes.card.root
 }], ["card/order", {
-  path: Ve.card.reorder.choosePan
+  path: AppRoutes.card.reorder.choosePan
 }], ["junior/card/order", {
-  path: Ve.junior.card.reorder.choosePan,
+  path: AppRoutes.junior.card.reorder.choosePan,
   paramsMap: {
     accountNumber: "accountNumber"
   }
 }], ["card/activate", {
-  path: Ve.card.securitySetting.cardNumber,
+  path: AppRoutes.card.securitySetting.cardNumber,
   paramsMap: {
     number: "number"
   }
 }], ["junior/card/activate", {
-  path: Ve.card.securitySetting.cardNumber,
+  path: AppRoutes.card.securitySetting.cardNumber,
   paramsMap: {
     number: "number",
     accountNumber: "accountNumber"
   }
 }], ["card", {
-  path: Ve.card.root
+  path: AppRoutes.card.root
 }], ["card/generate-otp", {
-  path: Ve.card.root,
+  path: AppRoutes.card.root,
   data: {
     otp: "true"
   }
 }], ["card/shipment-tracking", {
-  path: Ve.card.shipmentTracking.root,
+  path: AppRoutes.card.shipmentTracking.root,
   paramsMap: {
     package_id: "packageId"
   }
 }], ["junior/card/shipment-tracking", {
-  path: Ve.junior.card.shipmentTracking.root,
+  path: AppRoutes.junior.card.shipmentTracking.root,
   paramsMap: {
     package_id: "packageId",
     accountNumber: "accountNumber"
   }
 }], ["card/resend/address", {
-  path: Ve.card.resend.locations.recent,
+  path: AppRoutes.card.resend.locations.recent,
   paramsMap: {
     account_number: "accountNumber",
     package_id: "packageId"
   }
 }], ["junior/card/resend/address", {
-  path: Ve.junior.card.resend.locations.recent,
+  path: AppRoutes.junior.card.resend.locations.recent,
   paramsMap: {
     accountNumber: "accountNumber",
     package_id: "packageId"
   }
 }], ["card/activate/pin-entry", {
-  path: Ve.card.securitySetting.activation,
+  path: AppRoutes.card.securitySetting.activation,
   paramsMap: {
     number: "cardNumber"
   }
 }], ["junior/card/activate/pin-entry", {
-  path: Ve.junior.card.securitySetting.activation,
+  path: AppRoutes.junior.card.securitySetting.activation,
   paramsMap: {
     number: "cardNumber",
     accountNumber: "accountNumber"
   }
 }], ["card/select-color", {
-  path: Ve.card.order.selectColor,
+  path: AppRoutes.card.order.selectColor,
   paramsMap: {
     card_present_disabled: "isOptionalCard"
   }
 }], ["cheque-registration/main", {
-  path: Ve.cheque.root
+  path: AppRoutes.cheque.root
 }], ["cheque-registration/inquiry", {
-  path: Ve.cheque.chequeInquiry,
+  path: AppRoutes.cheque.chequeInquiry,
   paramsMap: {
     cheque_registration_number: "registrationNumber"
   }
 }], ["payment/cashback", {
-  path: Ve.cashback.root
+  path: AppRoutes.cashback.root
 }], ["payment/cashback/vendor-profile", {
-  path: Ve.cashback.merchantProfile,
+  path: AppRoutes.cashback.merchantProfile,
   paramsMap: {
     vendor_id: "merchantId"
   }
 }], ["payment/cashback/branches", {
-  path: Ve.cashback.branches,
+  path: AppRoutes.cashback.branches,
   paramsMap: {
     vendor_id: "merchantId"
   }
 }], ["payment/qr/scan", {
-  path: Ve.payment.qrFlow.root
+  path: AppRoutes.payment.qrFlow.root
 }], ["payment/qr/my-code", {
-  path: Ve.bluQR.root
+  path: AppRoutes.bluQR.root
 }], ["payment/qr/inquiry", {
-  path: Ve.payment.qrFlow.amount,
+  path: AppRoutes.payment.qrFlow.amount,
   paramsMap: {
     qr_text: "qrText"
   }
 }], ["payment/direct-debit", {
-  path: Ve.directDebit.root
+  path: AppRoutes.directDebit.root
 }], ["payment/direct-debit/details", {
-  path: Ve.directDebit.activation,
+  path: AppRoutes.directDebit.activation,
   paramsMap: {
     number: "contractNumber"
   }
 }], ["payment/bill/auto-payment", {
-  path: Ve.payment.bill.autoPayment,
+  path: AppRoutes.payment.bill.autoPayment,
   paramsMap: {
     phone_number: "phoneNumber",
     bill_id: "billId",
     default_amount: "defaultAmount"
   }
 }], ["order-card/intro", {
-  path: Ve.kyc.adult.verified
+  path: AppRoutes.kyc.adult.verified
 }], ["order-optional-card/intro", {
-  path: Ve.kyc.adult.optionalCardVerified
+  path: AppRoutes.kyc.adult.optionalCardVerified
 }], ["order-optional-card/card-info", {
-  path: Ve.kyc.adult.successfulOptionalCard
+  path: AppRoutes.kyc.adult.successfulOptionalCard
 }], ["card/link-account/first-order/initiate", {
-  path: Ve.kyc.adult.noNameVerified
+  path: AppRoutes.kyc.adult.noNameVerified
 }], ["card/link-account/intro", {
-  path: Ve.card.noName.currentUser
+  path: AppRoutes.card.noName.currentUser
 }], ["card/link-account/activate/pin-entry", {
-  path: Ve.card.noName.activation,
+  path: AppRoutes.card.noName.activation,
   paramsMap: {
     number: "serverCardNumber"
   }
 }], ["loan/main", {
-  path: Ve.loan.root
+  path: AppRoutes.loan.root
 }], ["loan/details", {
-  path: Ve.loan.detail,
+  path: AppRoutes.loan.detail,
   paramsMap: {
     number: "accountId"
   }
 }], ["loan/application", {
-  path: Ve.loan.root
+  path: AppRoutes.loan.root
 }], ["loan/application/initiate", {
-  path: Ve.loan.application.customizeProduct
+  path: AppRoutes.loan.application.customizeProduct
 }], ["loan/condition/sections", {
-  path: Ve.loan.condition,
+  path: AppRoutes.loan.condition,
   paramsMap: {
     product_id: "productId"
   }
 }], ["loan/condition/sections/loan-calculator", {
-  path: Ve.loan.condition
+  path: AppRoutes.loan.condition
 }], ["loan/condition/sections/credit-state", {
-  path: Ve.loan.condition
+  path: AppRoutes.loan.condition
 }], ["loan/condition/section/loan-application-process", {
-  path: Ve.loan.condition
+  path: AppRoutes.loan.condition
 }], ["loan/application/pre-initiate", {
-  path: Ve.loan.postPurchaseCredit,
+  path: AppRoutes.loan.postPurchaseCredit,
   paramsMap: {
     product_id: "productId"
   }
 }], ["loan/guarantee/sections", {
-  path: Ve.loan.application.guaranteeCondition,
+  path: AppRoutes.loan.application.guaranteeCondition,
   paramsMap: {
     guarantee_id: "guaranteeId"
   }
 }], ["loan/application/guarantee/details", {
-  path: Ve.loan.application.guaranteeFailedDetails,
+  path: AppRoutes.loan.application.guaranteeFailedDetails,
   paramsMap: {
     guarantee_id: "guaranteeId"
   }
 }], ["loan/guarantee/details", {
-  path: Ve.loan.application.guaranteeDetails,
+  path: AppRoutes.loan.application.guaranteeDetails,
   paramsMap: {
     guarantee_id: "guaranteeId"
   }
 }], ["loan/guarantee/agreement/terms", {
-  path: Ve.loan.application.guaranteeTerms,
+  path: AppRoutes.loan.application.guaranteeTerms,
   paramsMap: {
     terms_id: "termsId",
     guarantee_id: "guaranteeId"
   }
 }], ["dashboard/deposit-funding/card-credentials", {
-  path: Ve.topUp.sourceDetails
+  path: AppRoutes.topUp.sourceDetails
 }], ["dashboard/analytics/category", {
-  path: Ve.dashboard.analytics.category
+  path: AppRoutes.dashboard.analytics.category
 }], ["dashboard/vault", {
-  path: Ve.box.list,
+  path: AppRoutes.box.list,
   paramsMap: {
     "selected-category": "selectedTab"
   }
 }], ["dashboard/vault/details", {
-  path: Ve.box.list,
+  path: AppRoutes.box.list,
   paramsMap: {
     number: "number"
   }
 }], ["dashboard/vault/create", {
-  path: Ve.box.list,
+  path: AppRoutes.box.list,
   paramsMap: {
     "default-preset": "defaultPreset",
     type: "boxType"
   }
 }], ["dashboard/vault/types/fund/list", {
-  path: Ve.box.fund.commodity.intro,
+  path: AppRoutes.box.fund.commodity.intro,
   paramsMap: {
     fund_types: "fundTypes",
     fund_id: "id"
   }
 }], ["dashboard/vault/types/fund/intro", {
-  path: Ve.box.fund.commodity.intro,
+  path: AppRoutes.box.fund.commodity.intro,
   paramsMap: {
     fund_id: "id"
   }
 }], ["dashboard/vault/types", {
-  path: Ve.box.selectType
+  path: AppRoutes.box.selectType
 }], ["login/address-change", {
-  path: Ve.forceActions.changeAddress.root
+  path: AppRoutes.forceActions.changeAddress.root
 }], ["dashboard/deposit-funding/direct-debit/list", {
-  path: Ve.topUp.auto.contracts.root,
+  path: AppRoutes.topUp.auto.contracts.root,
   paramsMap: {
     "announce-type": "announceType"
   }
 }], ["deposit-funding/direct-debit/list", {
-  path: Ve.topUp.auto.contracts.root,
+  path: AppRoutes.topUp.auto.contracts.root,
   paramsMap: {
     "announce-type": "announceType"
   }
 }], ["dashboard/deposit-funding/direct-debit/on-demand", {
-  path: Ve.topUp.fastCharge.root,
+  path: AppRoutes.topUp.fastCharge.root,
   paramsMap: {
     "announce-type": "announceType"
   }
 }], ["deposit-funding/direct-debit/on-demand", {
-  path: Ve.topUp.fastCharge.root,
+  path: AppRoutes.topUp.fastCharge.root,
   paramsMap: {
     "announce-type": "announceType"
   }
 }], ["deposit-funding/direct-debit/contract", {
-  path: Ve.topUp.auto.contracts.detail,
+  path: AppRoutes.topUp.auto.contracts.detail,
   paramsMap: {
     "contract-id": "id"
   }
 }], ["deposit-funding/direct-debit/on-demand/details", {
-  path: Ve.topUp.fastCharge.contractDetail,
+  path: AppRoutes.topUp.fastCharge.contractDetail,
   paramsMap: {
     "contract-id": "id"
   }
 }], ["settings/achievement/list", {
-  path: Ve.achievement.root
+  path: AppRoutes.achievement.root
 }], ["dashboard/deposit-funding/receipt", {
-  path: Ve.topUp.ipgCallback,
+  path: AppRoutes.topUp.ipgCallback,
   paramsMap: {
     id: "id"
   }
 }], ["deposit-funding/source", {
-  path: Ve.topUp.root
+  path: AppRoutes.topUp.root
 }], ["payment/qr-scan", {
-  path: Ve.payment.qrFlow.root
+  path: AppRoutes.payment.qrFlow.root
 }], ["onboarding/slide-show", {
-  path: Ve.onboarding.root
+  path: AppRoutes.onboarding.root
 }], ["inbox/list", {
-  path: Ve.inbox.root
+  path: AppRoutes.inbox.root
 }], ["inbox/contents", {
-  path: Ve.inbox.detail,
+  path: AppRoutes.inbox.detail,
   paramsMap: {
     id: "messageId"
   }
 }], ["group-bill/groups", {
-  path: Ve.groupBill.root
+  path: AppRoutes.groupBill.root
 }], ["payment/group-bill/join", {
-  path: Ve.groupBill.root
+  path: AppRoutes.groupBill.root
 }], ["group-bill/join", {
-  path: Ve.groupBill.root
+  path: AppRoutes.groupBill.root
 }], ["group-bill/bill/details", {
-  path: Ve.groupBill.expenseDetail,
+  path: AppRoutes.groupBill.expenseDetail,
   paramsMap: {
     "bill-id": "expenseId",
     "group-id": "id"
   }
 }], ["group-bill/actions", {
-  path: Ve.groupBill.expenses,
+  path: AppRoutes.groupBill.expenses,
   paramsMap: {
     "group-id": "id"
   }
 }], ["loan/list-active", {
-  path: Ve.loan.established
+  path: AppRoutes.loan.established
 }], ["settings/feedback", {
-  path: Ve.feedback.root,
+  path: AppRoutes.feedback.root,
   paramsMap: {
     source_type: "sourceType",
     subject: "subjectCode"
   }
 }], ["payment", {
-  path: Ve.oneClickPayment.root,
+  path: AppRoutes.oneClickPayment.root,
   paramsMap: {
     transaction_id: "transactionId"
   }
 }], ["vehicle-services/main", {
-  path: Ve.vehicleServices.root
+  path: AppRoutes.vehicleServices.root
 }], ["vehicle-services/fine/inquiry/methods", {
-  path: Ve.vehicleServices.fineInquiryMethods,
+  path: AppRoutes.vehicleServices.fineInquiryMethods,
   paramsMap: {
     plate_number: "plateNumber",
     inquiry_service_id: "inquiryServiceId"
   }
 }], ["vehicle-services/fine/inquiry/select-source", {
-  path: Ve.vehicleServices.inquirySelectSource,
+  path: AppRoutes.vehicleServices.inquirySelectSource,
   paramsMap: {
     plate_number: "plateNumber",
     inquiry_service_id: "inquiryServiceId"
   }
 }], ["vehicle-services/freeway-toll/main", {
-  path: Ve.vehicleServices.freewayTollDetail,
+  path: AppRoutes.vehicleServices.freewayTollDetail,
   paramsMap: {
     plate_number: "plateNumber",
     inquiry_service_id: "inquiryServiceId"
   }
 }], ["vehicle-services/fine/main", {
-  path: Ve.vehicleServices.fineHistory,
+  path: AppRoutes.vehicleServices.fineHistory,
   paramsMap: {
     plate_number: "plateNumber",
     inquiry_service_id: "inquiryServiceId"
   }
 }], ["vehicle-services/vehicle/main", {
-  path: Ve.vehicleServices.detail,
+  path: AppRoutes.vehicleServices.detail,
   paramsMap: {
     plate_number: "plateNumber"
   }
 }], ["settings/profile/avatar/ready", {
-  path: Ve.settings.avatar.confirmation,
+  path: AppRoutes.settings.avatar.confirmation,
   paramsMap: {
     avatar_id: "avatarId"
   }
 }], ["junior/kyc/status", {
-  path: Ve.junior.kyc.status,
+  path: AppRoutes.junior.kyc.status,
   paramsMap: {
     "national-id": "nationalId"
   }
 }], ["junior/kyc/notarization/waiting", {
-  path: Ve.junior.kyc.waiting
+  path: AppRoutes.junior.kyc.waiting
 }], ["junior/child-profile", {
-  path: Ve.junior.profile,
+  path: AppRoutes.junior.profile,
   paramsMap: {
     "account-number": "accountNumber"
   }
@@ -24794,7 +24798,7 @@ const WP = ({
   } = BD();
   return <AO header={{
     title: _0x3a98d1 == null ? undefined : _0x3a98d1.title,
-    startElements: _0x272154 || <Nx path={Ve.dashboard.root} />,
+    startElements: _0x272154 || <Nx path={AppRoutes.dashboard.root} />,
     ..._0x181526
   }} shouldHandleSafeAreas={_0x8ec38}><_Component16 receipt={_0x3a98d1} /></AO>;
 };
@@ -24823,7 +24827,7 @@ const QP = ({
   });
   return <AO header={{
     title: (_0xdd0c40 = _0x1cc860 == null ? undefined : _0x1cc860.receipt) == null ? undefined : _0xdd0c40.title,
-    startElements: _0x430fe6 ?? <Nx path={Ve.dashboard.root} />,
+    startElements: _0x430fe6 ?? <Nx path={AppRoutes.dashboard.root} />,
     ...(_0x5dc88a ?? {})
   }} shouldHandleSafeAreas={_0x2fb287}><_R errorProps={{
       title: _0x49c97b == null ? undefined : _0x49c97b.message,
@@ -24916,7 +24920,7 @@ const $P = ({
           expirationDate: _0x219ce0.expirationDate
         };
         _0x48bc25(_0x66a347, {
-          onSuccess: () => _0x396469.push(Ve.topUp.receipt),
+          onSuccess: () => _0x396469.push(AppRoutes.topUp.receipt),
           onError: _0x2dc3a7 => {
             a84_0x4a7d50.toast({
               type: "error",
@@ -25037,7 +25041,7 @@ const ZP = ({
                 destinationAccount: (_0xd1c96 = _0x4c4928 == null ? undefined : _0x4c4928.data) == null ? undefined : _0xd1c96.id
               }, {
                 onSuccess: () => {
-                  _0x2b9c6b.push(Ct(Ve.topUp.amount, {
+                  _0x2b9c6b.push(Ct(AppRoutes.topUp.amount, {
                     pan: _0x4e2639,
                     ...(_0x480d01 && {
                       id: _0x480d01
@@ -25324,7 +25328,7 @@ class sO {
 }
 function rO(_0x613555) {
   const _0x2a0a41 = fa.getInstance();
-  const _0x68753d = new __({
+  const _0x68753d = new ApiService({
     domainService: aN,
     options: {
       requestId: _0x613555
@@ -25586,7 +25590,7 @@ const _Component45 = a84_0x504ae4.forwardRef(({
     }
     if (_0x16d353 && _0x4597f4) {
       lO(null);
-      const _0x48783d = _0x4597f4 ? Ct(Ve.topUp.ipgReceipt, {
+      const _0x48783d = _0x4597f4 ? Ct(AppRoutes.topUp.ipgReceipt, {
         id: _0x4597f4
       }) : null;
       if (_0x16d353 != null) {
@@ -25611,7 +25615,7 @@ const _Component45 = a84_0x504ae4.forwardRef(({
     if (_0x16d353 && _0xaa3ea2 && (_0x20644e == null ? undefined : _0x20644e.shouldShowNestedFlowTopUpReceipt)) {
       cO(null);
       if (_0x16d353 != null) {
-        _0x16d353.start(Ve.topUp.receipt);
+        _0x16d353.start(AppRoutes.topUp.receipt);
       }
     }
   }, [_0x16d353]);
@@ -25835,14 +25839,14 @@ const _Component45 = a84_0x504ae4.forwardRef(({
       title: _0x19c883
     }}><div ref={_0x30465f}><header className="flex flex-col justify-center items-center pb-6 relative">{_0x50ad04 && <a84_0x4a7d50.CounterParty title={_0x50ad04 == null ? undefined : _0x50ad04.name} description={_0x50ad04 == null ? undefined : _0x50ad04.description} className="mb-2" isLoading={_0x50ad04 == null ? undefined : _0x50ad04.isLoading} avatar={_0x17a61b} />}<h1>{_0x418b66 == null ? undefined : _0x418b66.localizedDescription}</h1><span className={_0x2801da}>{_0x49a86a.text}</span><div className="absolute w-screen border-b border-split-line bottom-0 border-border-primary" /></header><div className="mt-6 mb-5"><div className="mb-6"><a84_0x4a7d50.PaymentSource label={_0x489f7e} onClick={() => !_0x43d6fd && (_0x519842 == null ? undefined : _0x519842.isActive) && _0x50d686(true)} startElement={<QC source={_0xcdc828.image} />} title={_0xcdc828.title} description={_0xcdc828.description} helperText={_0xcdc828.message} hasError={_0xcdc828.hasError} isDisabled={_0x43d6fd} controllerRef={_0x4f447a} hasBorderForStartElement={Boolean(_0x3f2c77)} isActive={!_0x43d6fd && (_0x519842 == null ? undefined : _0x519842.isActive)} /></div><p className="mt-4 px-4 text-on-light-secondary">{_0x3f0c82}</p>{_0x1eae19 ? _0x190227 && !_0xab6109 && <a84_0x4a7d50.Message hasStartIcon={false} title={_0x2907aa(yO.fastChargeCardTitle)} description={_0x2907aa(yO.fastChargeCardDescription)} endElement={<ID buttonColor="primary" centerCircleSize="small" shouldShowText={false} isLoading={_0x1cf9d5 || _0x3f68a1} onClick={() => _0x16d353.start()} onLongPress={() => _0x406b3b(true)} isSuccess={_0x27eed2} />} mode="infoHighEmphasis" /> : _0x22021f}{_0xab6109 && Boolean(_0x26ce46) && <a84_0x4a7d50.Message iconMode="filled" description={_0x2907aa(yO.transactionFeeDescription)} title={_0x2907aa(yO.transactionFeeTitle)} />}</div><_D isBottomSheetBlocking={_0x59eefa} controllerRef={_0x40afe5} routes={[{
           exact: true,
-          path: Ve.topUp.root,
+          path: AppRoutes.topUp.root,
           render: () => <ZP shouldHandleSafeAreas={false} headerProps={{
             startElements: <Nx onClick={() => _0x16d353.close()} iconName="Close" />,
             endElements: <OR onActionSheetStateChange={_0x4e0177 => _0x1ba101(!_0x4e0177)} />
           }} />
         }, {
           exact: true,
-          path: Ve.topUp.amount,
+          path: AppRoutes.topUp.amount,
           render: () => <HP shouldHandleSafeAreas={false} headerProps={{
             endElements: <OR onActionSheetStateChange={_0x1560ec => _0x1ba101(!_0x1560ec)} />
           }} onWillNavigateToIpg={() => {
@@ -25853,7 +25857,7 @@ const _Component45 = a84_0x504ae4.forwardRef(({
           }} />
         }, {
           exact: true,
-          path: Ve.topUp.sourceDetails,
+          path: AppRoutes.topUp.sourceDetails,
           render: () => <$P shouldHandleSafeAreas={false} headerProps={{
             endElements: <OR onActionSheetStateChange={_0x6936de => _0x1ba101(!_0x6936de)} />
           }} onDepositFundSuccess={() => {
@@ -25864,14 +25868,14 @@ const _Component45 = a84_0x504ae4.forwardRef(({
           }} />
         }, {
           exact: true,
-          path: Ve.topUp.receipt,
+          path: AppRoutes.topUp.receipt,
           render: () => <WP shouldHandleSafeAreas={false} headerProps={{
             endElements: <OR onActionSheetStateChange={_0x218e4f => _0x1ba101(!_0x218e4f)} />,
             startElements: <Nx onClick={() => _0x16d353.close()} iconName="Close" />
           }} />
         }, {
           exact: true,
-          path: Ve.topUp.ipgReceipt,
+          path: AppRoutes.topUp.ipgReceipt,
           render: () => <QP shouldHandleSafeAreas={false} headerProps={{
             startElements: <Nx onClick={() => _0x16d353.close()} iconName="Close" />,
             endElements: <OR onActionSheetStateChange={_0x229716 => _0x1ba101(!_0x229716)} />
@@ -26275,9 +26279,9 @@ const OO = () => {
     },
     onDoubleTap: (_0x384f7d, _0x39c8e1) => {
       const _0x2572ab = Mo();
-      if (!_0x46031b && _0x39c8e1.replace("/", "") === Ve.settings.root.replace("/", "")) {
+      if (!_0x46031b && _0x39c8e1.replace("/", "") === AppRoutes.settings.root.replace("/", "")) {
         if (_0x2572ab) {
-          _0x4b26d9.push(Ct(Ve.switchAccount.root, {
+          _0x4b26d9.push(Ct(AppRoutes.switchAccount.root, {
             profile_id: _0x2572ab
           }));
         }
@@ -26287,10 +26291,10 @@ const OO = () => {
   const _0x3cd6b7 = ({
     isActive: _0x1d6aae = false
   }) => <div className={bt(["h-[27px] w-[27px]"])} onTouchEnd={_0x44781d => {
-    _0x167cea(_0x44781d, Ve.settings.root);
+    _0x167cea(_0x44781d, AppRoutes.settings.root);
     _0x358276(_0x44781d);
     setTimeout(() => _0x480054(false), 300);
-  }} onClick={_0x55b74a => _0x29e6ae(_0x55b74a, Ve.settings.root)} onTouchStart={_0x4faa93 => {
+  }} onClick={_0x55b74a => _0x29e6ae(_0x55b74a, AppRoutes.settings.root)} onTouchStart={_0x4faa93 => {
     _0x59d267(_0x4faa93);
     _0x480054(false);
   }} {..._0xd3ff68}><a84_0x4a7d50.CircularProgressbar value={100} strokeWidth={6} chartColor={_0x1d6aae ? "border-brand" : "surface-background"} borderGap={0} backgroundStroke={_0x1d6aae ? "border-brand" : "surface-background"} content={<QC source={_0x2e9588 == null ? undefined : _0x2e9588.profileImage} className="w-full h-full block rounded-[50%]" alt="profile" />} /></div>;
@@ -26305,7 +26309,7 @@ const OO = () => {
       color: "primary",
       mode: "filled"
     },
-    path: Ve.dashboard.root,
+    path: AppRoutes.dashboard.root,
     onClick: _0x29e6ae
   }, {
     icon: {
@@ -26318,7 +26322,7 @@ const OO = () => {
       color: "primary",
       mode: "filled"
     },
-    path: Ve.transfer.root,
+    path: AppRoutes.transfer.root,
     onClick: _0x29e6ae
   }, {
     icon: {
@@ -26331,7 +26335,7 @@ const OO = () => {
       color: "primary",
       mode: "filled"
     },
-    path: Ve.payment.hub,
+    path: AppRoutes.payment.hub,
     onClick: _0x29e6ae
   }, {
     icon: {
@@ -26344,7 +26348,7 @@ const OO = () => {
       color: "primary",
       mode: "filled"
     },
-    path: Ve.card.root,
+    path: AppRoutes.card.root,
     onClick: _0x29e6ae
   }, {
     activeIcon: _0x3cd6b7({
@@ -26353,7 +26357,7 @@ const OO = () => {
     icon: _0x3cd6b7({
       isActive: false
     }),
-    path: Ve.settings.root
+    path: AppRoutes.settings.root
   }];
   const _0x20a647 = jo(_0x707d67);
   return <a84_0x593ff2.Fragment><a84_0x4a7d50.AppNavigation items={_0xfc8e7a} currentPath={_0x4b26d9.location.pathname} />{_0x20a647 && <Gq accountProfile={_0x707d67} isOpen={_0x22ecbc} onClose={() => {
@@ -26937,7 +26941,7 @@ const YO = a84_0x504ae4.forwardRef(({
 const _Component57 = ({
   children: _0x381902,
   ..._0x444827
-}) => <_Component28 redirectPath={Ve.login.root} {..._0x444827}>{_0x381902}</_Component28>;
+}) => <_Component28 redirectPath={AppRoutes.login.root} {..._0x444827}>{_0x381902}</_Component28>;
 const HO = {};
 const WO = (_0x1765b6, _0xf5c48b, _0x10bb6f, _0x371ef8) => {
   const {
@@ -27102,7 +27106,7 @@ const _Component35 = ({
   }, {
     onClick: () => {
       if (!!_0x270517 && !(_0x557c42 == null ? undefined : _0x557c42.isFreezed) && !(_0x557c42 == null ? undefined : _0x557c42.cardPresentDisabled)) {
-        _0x255db7.push(Ve.card.securitySetting.root);
+        _0x255db7.push(AppRoutes.card.securitySetting.root);
       }
     },
     startElement: <a84_0x4a7d50.DiscIconHolder background={_0x270517 ? "primary" : "basic"} isDisabled={!_0x270517 || (_0x557c42 == null ? undefined : _0x557c42.isFreezed) || (_0x557c42 == null ? undefined : _0x557c42.cardPresentDisabled)} className="ml-4 text-content-constant-on-light-same-on-dark-contrast"><a84_0x4a7d50.Icon name="Security" color="onPrimary" /></a84_0x4a7d50.DiscIconHolder>,
@@ -27119,7 +27123,7 @@ const _Component35 = ({
     onClick: () => {
       if (_0x557c42 == null ? undefined : _0x557c42.isReorderAllowed) {
         Co.menuOrderMainCard();
-        _0x255db7.push(Ve.card.reorder.choosePan);
+        _0x255db7.push(AppRoutes.card.reorder.choosePan);
       }
     },
     startElement: <a84_0x4a7d50.DiscIconHolder isDisabled={!(_0x557c42 == null ? undefined : _0x557c42.isReorderAllowed)} background={(_0x557c42 == null ? undefined : _0x557c42.isReorderAllowed) ? "primary" : "basic"} className="ml-4 text-content-constant-on-light-same-on-dark-contrast"><a84_0x4a7d50.Icon name="CardExchange" color="onPrimary" /></a84_0x4a7d50.DiscIconHolder>,
@@ -27573,7 +27577,7 @@ const Ck = () => {
       } else {
         _0x2aa735(true);
       }
-      _0x47953a.replace(Ve.card.root);
+      _0x47953a.replace(AppRoutes.card.root);
     }
   }, [_0x38bb98, _0x4d36d8, _0x47953a]);
   const {
@@ -27627,7 +27631,7 @@ const Ck = () => {
     _0x482afc.ACTIVATE = "ACTIVATE";
     _0x482afc.LINK_ACCOUNT_ACTIVATE = "LINK_ACCOUNT_ACTIVATE";
     _0x482afc.UNLINK_ACCOUNT = "UNLINK_ACCOUNT";
-    const _0xc38e3a = _0x470b4f => _0x32d7bb.push(Ct(Ve.card.securitySetting.cardNumber, {
+    const _0xc38e3a = _0x470b4f => _0x32d7bb.push(Ct(AppRoutes.card.securitySetting.cardNumber, {
       number: _0x470b4f
     }));
     const _0x55091d = {
@@ -27640,7 +27644,7 @@ const Ck = () => {
     };
     const _0x42a209 = (_0x231894, _0xb62237) => {
       if (_0xb62237) {
-        _0x32d7bb.push(Ct(Ve.card.securitySetting.optionalCardActivation, {
+        _0x32d7bb.push(Ct(AppRoutes.card.securitySetting.optionalCardActivation, {
           cardNumber: _0x231894
         }));
       } else if (_0x34b938 == null ? undefined : _0x34b938.isActive) {
@@ -27724,7 +27728,7 @@ const Ck = () => {
                 onDismiss: Bx,
                 children: () => <_Component33 onClick={() => {
                   Co.linkAccountPanEntry();
-                  _0x32d7bb.push(Ve.card.noName.cardNumber);
+                  _0x32d7bb.push(AppRoutes.card.noName.cardNumber);
                 }} />
               });
             }
@@ -27749,7 +27753,7 @@ const Ck = () => {
   H_(_0xef683b || _0x3ec670);
   a84_0x504ae4.useEffect(() => {
     _0x38f398({
-      routes: [Ve.card.reorder.request, Ve.card.resend.request]
+      routes: [AppRoutes.card.reorder.request, AppRoutes.card.resend.request]
     });
   }, []);
   const _0x455524 = _0x2f15de => {
@@ -28069,7 +28073,7 @@ const zk = () => {
             return <Gk contract={_0x1edc0a} onClick={() => {
               _0x3a859e({
                 contract: _0x1edc0a,
-                path: Ve.directDebit.activation
+                path: AppRoutes.directDebit.activation
               });
             }} key={(((_0x5b8dc7 = (_0x459d06 = _0x1edc0a == null ? undefined : _0x1edc0a.subscription) == null ? undefined : _0x459d06.contractor) == null ? undefined : _0x5b8dc7.name) || ((_0x517c06 = (_0x4ceef5 = _0x1edc0a == null ? undefined : _0x1edc0a.topUp) == null ? undefined : _0x4ceef5.contractor) == null ? undefined : _0x517c06.name)) + "-" + _0x115a29} />;
           }}</_Component37>}</div><h4 className="mt-4 mb-2 px-4"><_Component6 {...Vk.myServices} /></h4>{_0x966b6f ? <_Component4 title={_0x16479d == null ? undefined : _0x16479d.message} onClick={() => _0x2b6cb3()} isFullPage={false} /> : <_Component37 data={_0x242504} emptyStateElement={_0x18e121} isLoading={_0x9d2a64} hasError={_0x966b6f}>{(_0x160997, _0x1a7465) => {
@@ -28080,7 +28084,7 @@ const zk = () => {
           return _0x160997 && <Gk contract={_0x160997} onClick={() => {
             _0x3a859e({
               contract: _0x160997,
-              path: Ve.directDebit.detail
+              path: AppRoutes.directDebit.detail
             });
           }} key={(((_0x248c5b = (_0x421cda = _0x160997 == null ? undefined : _0x160997.subscription) == null ? undefined : _0x421cda.contractor) == null ? undefined : _0x248c5b.name) || ((_0x4124b0 = (_0x25f915 = _0x160997 == null ? undefined : _0x160997.topUp) == null ? undefined : _0x25f915.contractor) == null ? undefined : _0x4124b0.name)) + "-" + _0x1a7465} />;
         }}</_Component37>}<a84_0x4a7d50.Onboarding isOpen={_0x31a283} slides={_0x1020de} onDismiss={() => {
@@ -28748,7 +28752,7 @@ class gw {
 }
 function Ew() {
   const _0x4ea962 = fa.getInstance();
-  const _0x348b8f = new __({
+  const _0x348b8f = new ApiService({
     domainService: tT,
     accountProfileService: _0x4ea962
   });
@@ -29480,7 +29484,7 @@ const tL = {
       var _0x2bdaf0;
       var _0x29d6c9;
       if (_0x2bcfdb == null ? undefined : _0x2bcfdb.applicationId) {
-        _0x35ea56.push(Ct(Ve.loan.condition, {
+        _0x35ea56.push(Ct(AppRoutes.loan.condition, {
           productId: _0x2bcfdb == null ? undefined : _0x2bcfdb.productId
         }), {
           loanApplication_id: _0x2bcfdb.applicationId
@@ -29516,7 +29520,7 @@ const tL = {
       var _0xcc900c;
       var _0x140c57;
       if (_0x3c841a == null ? undefined : _0x3c841a.applicationId) {
-        _0xe6d281.push(Ct(Ve.loan.condition, {
+        _0xe6d281.push(Ct(AppRoutes.loan.condition, {
           productId: _0x3c841a == null ? undefined : _0x3c841a.productId
         }), {
           loanApplication_id: _0x3c841a.applicationId
@@ -29697,7 +29701,7 @@ const dL = () => {
       if (_0x2971de.current) {
         _0x1bf2f0();
         _0x167610();
-        _0x173456.push(Ve.loan.application.guaranteeRejected);
+        _0x173456.push(AppRoutes.loan.application.guaranteeRejected);
       }
     },
     children: _0x22e241 => <_Component40 onCancel={() => Bx(_0x22e241)} onReject={() => {
@@ -29736,7 +29740,7 @@ const dL = () => {
       application_id: _0x37cce0
     } = _0xcfdee9 ?? {};
     _0x1bf2f0();
-    _0x173456.push(Ve.loan.application.guarantorAgreement, {
+    _0x173456.push(AppRoutes.loan.application.guarantorAgreement, {
       applicationId: _0x37cce0,
       contractNumber: _0x25f6fb,
       productId: _0x58bf6b,
@@ -29750,7 +29754,7 @@ const dL = () => {
       onSuccess: () => {
         _0x1bf2f0();
         _0x167610();
-        _0x173456.replace(Ve.loan.application.guaranteeAccepted);
+        _0x173456.replace(AppRoutes.loan.application.guaranteeAccepted);
       },
       onError: _0x139583 => {
         a84_0x4a7d50.toast({
@@ -29989,7 +29993,7 @@ const bL = {
             color: "gray"
           }} title={_0x536b3a} /></div><a84_0x4a7d50.FixedBottomBox scroll={{
           targetRef: _0x356b02
-        }}><a84_0x4a7d50.Button type="primary" title={_0x2cdc97(hL.okButton)} onClick={() => _0x50c12b.replace(Ve.login.root)} /></a84_0x4a7d50.FixedBottomBox></a84_0x593ff2.Fragment>}</a84_0x593ff2.Fragment>;
+        }}><a84_0x4a7d50.Button type="primary" title={_0x2cdc97(hL.okButton)} onClick={() => _0x50c12b.replace(AppRoutes.login.root)} /></a84_0x4a7d50.FixedBottomBox></a84_0x593ff2.Fragment>}</a84_0x593ff2.Fragment>;
   },
   [qn.CLOSE_ACCOUNT_REASON_CBI_INQUIRY_REJECTED]: () => {
     const {
@@ -30021,7 +30025,7 @@ const fL = ({
   const _0x5a5ce4 = bL[_0x3fd1bb];
   const _0x1bad42 = a84_0x274dbe();
   return <AO header={{
-    startElements: <Nx iconName="Close" onClick={() => _0x1bad42.replace(Ve.login.root)} />
+    startElements: <Nx iconName="Close" onClick={() => _0x1bad42.replace(AppRoutes.login.root)} />
   }} className="flex flex-col items-center justify-center h-screen"><_0x5a5ce4 /></AO>;
 };
 const AL = "CHARGE_PAYMENT_RECENT_PHONES";
@@ -30428,7 +30432,7 @@ class UL {
 }
 function LL(_0xc36130) {
   const _0x2fda0d = fa.getInstance();
-  const _0x47f2cd = new __({
+  const _0x47f2cd = new ApiService({
     domainService: ug,
     options: {
       requestId: _0xc36130
@@ -30705,7 +30709,7 @@ const JL = () => {
                 paymentLink: _0x309101,
                 creationRestriction: _0x171bbe
               });
-              _0x2b82ed.push(Ct(Ve.payment.paymentLink.detail, {
+              _0x2b82ed.push(Ct(AppRoutes.payment.paymentLink.detail, {
                 id: _0x309101.id
               }));
             }} key={_0x309101.id} />;
@@ -30720,7 +30724,7 @@ const JL = () => {
               type: "error"
             });
           } else {
-            _0x2b82ed.push(Ve.payment.paymentLink.new);
+            _0x2b82ed.push(AppRoutes.payment.paymentLink.new);
           }
         }} iconName="Add" title={_0x4d049f(KL.newLink)} /></a84_0x4a7d50.FixedBottomBox></a84_0x593ff2.Fragment>}</AO>;
 };
@@ -31761,7 +31765,7 @@ class rj {
 }
 function oj(_0x173dc1) {
   const _0x297ed3 = fa.getInstance();
-  const _0x1b4943 = new __({
+  const _0x1b4943 = new ApiService({
     domainService: MI,
     options: _0x173dc1,
     accountProfileService: _0x297ed3
@@ -31825,7 +31829,7 @@ class dj {
 }
 function pj() {
   const _0x16c4c4 = fa.getInstance();
-  const _0x411a11 = new __({
+  const _0x411a11 = new ApiService({
     domainService: IN,
     accountProfileService: _0x16c4c4
   });
@@ -31848,15 +31852,15 @@ const vj = [{
   isPassed: false,
   subSteps: [{
     stepName: "step_indicator",
-    path: Ve.junior.kyc.stepIndicator,
+    path: AppRoutes.junior.kyc.stepIndicator,
     isPassed: false
   }, {
     stepName: "date_of_birth",
-    path: Ve.junior.kyc.birthDate,
+    path: AppRoutes.junior.kyc.birthDate,
     isPassed: false
   }, {
     stepName: "user_name",
-    path: Ve.junior.kyc.username,
+    path: AppRoutes.junior.kyc.username,
     isPassed: false
   }]
 }, {
@@ -31864,19 +31868,19 @@ const vj = [{
   isPassed: false,
   subSteps: [{
     stepName: "step_indicator",
-    path: Ve.junior.kyc.stepIndicator,
+    path: AppRoutes.junior.kyc.stepIndicator,
     isPassed: false
   }, {
     stepName: "document_artifacts",
-    path: Ve.junior.kyc.birthCertificate.scan.firstPage.root,
+    path: AppRoutes.junior.kyc.birthCertificate.scan.firstPage.root,
     isPassed: false
   }, {
     stepName: "document_artifact_type",
-    path: Ve.junior.kyc.birthCertificate.scan.firstPage.root,
+    path: AppRoutes.junior.kyc.birthCertificate.scan.firstPage.root,
     isPassed: false
   }, {
     stepName: "document_serial_number",
-    path: Ve.junior.kyc.birthCertificate.scan.firstPage.root,
+    path: AppRoutes.junior.kyc.birthCertificate.scan.firstPage.root,
     isPassed: false
   }]
 }];
@@ -31893,7 +31897,7 @@ const hj = WO("juniorKyc", Ej, (_0x3f7e10, _0xb21407) => ({
     getNextStepPath() {
       const _0x47bbb7 = _0xb21407().steps;
       if (_0x47bbb7.every(_0x453d41 => _0x453d41.isPassed)) {
-        return Ve.junior.kyc.phoneNumberPopUp;
+        return AppRoutes.junior.kyc.phoneNumberPopUp;
       }
       const _0x366408 = _0x47bbb7.find(_0x110f2f => !_0x110f2f.isPassed).subSteps.find(_0xef18ae => !_0xef18ae.isPassed);
       return (_0x366408 == null ? undefined : _0x366408.path) ?? null;
@@ -32167,7 +32171,7 @@ const $j = ({
   }, {
     onClick: () => {
       if (_0x177d32 && !(_0x28aac8 == null ? undefined : _0x28aac8.isFreezed)) {
-        _0x4246c6.push(Ct(Ve.junior.card.securitySetting.root, {
+        _0x4246c6.push(Ct(AppRoutes.junior.card.securitySetting.root, {
           accountNumber: _0x2947b1
         }));
       }
@@ -32185,7 +32189,7 @@ const $j = ({
   }, {
     onClick: () => {
       if (_0x28aac8 == null ? undefined : _0x28aac8.isReorderAllowed) {
-        _0x4246c6.push(Ct(Ve.junior.card.reorder.choosePan, {
+        _0x4246c6.push(Ct(AppRoutes.junior.card.reorder.choosePan, {
           accountNumber: _0x2947b1
         }));
       }
@@ -32611,7 +32615,7 @@ const dF = () => {
     _0x1fa331.SUPPORT_CHAT = "SUPPORT_CHAT";
     _0x1fa331.ACTIVATE = "ACTIVATE";
     _0x1fa331.UNLINK_ACCOUNT = "UNLINK_ACCOUNT";
-    const _0x57bdd1 = _0x5f07cd => _0x16e25b.push(Ct(Ve.junior.card.securitySetting.cardNumber, {
+    const _0x57bdd1 = _0x5f07cd => _0x16e25b.push(Ct(AppRoutes.junior.card.securitySetting.cardNumber, {
       number: _0x5f07cd,
       accountNumber: _0x28296b
     }));
@@ -32684,7 +32688,7 @@ const dF = () => {
             SUPPORT_CHAT: _0x143c83,
             JUNIOR_CARD_ORDER_INTRO: () => {
               if (_0x1217f5 == null ? undefined : _0x1217f5.accountNumber) {
-                _0x16e25b.push(Ct(Ve.junior.card.order.selectColor, {
+                _0x16e25b.push(Ct(AppRoutes.junior.card.order.selectColor, {
                   accountNumber: _0x1217f5.accountNumber
                 }));
               }
@@ -32921,7 +32925,7 @@ const EF = ({
           if (_0xde4593) {
             _0xde4593(_0x5d2bf3);
           } else {
-            _0x13b981.push(Ct(Ve.dashboard.transactionDetail, {
+            _0x13b981.push(Ct(AppRoutes.dashboard.transactionDetail, {
               id: _0x5d2bf3.id
             }));
           }
@@ -33215,7 +33219,7 @@ const GF = ({
         content: _0x131827(MF.depositSoldAndDeleteSuccess),
         type: "success"
       });
-      _0x4844ea.replace(Ve.box.list);
+      _0x4844ea.replace(AppRoutes.box.list);
     } catch (_0x3f31e2) {
       a84_0x4a7d50.toast({
         content: _0x3f31e2.message,
@@ -33238,7 +33242,7 @@ const GF = ({
                   fundInvestmentUnitCount: _0x50099d
                 });
                 _0x321694(_0x5b8989 == null ? undefined : _0x5b8989.order);
-                _0x4844ea.push(Ct(Ve.box.fund.commodity.draft, {
+                _0x4844ea.push(Ct(AppRoutes.box.fund.commodity.draft, {
                   id: _0x3f84ab,
                   action: "delete"
                 }));
@@ -33361,7 +33365,7 @@ const nq = () => {
         onSuccess: _0x15c4c8 => {
           var _0x17f183;
           var _0x2d5be2;
-          _0x51a3bc.replace(Ct(Ve.box.wealth.detail, {
+          _0x51a3bc.replace(Ct(AppRoutes.box.wealth.detail, {
             fundId: (_0x2d5be2 = (_0x17f183 = _0x15c4c8 == null ? undefined : _0x15c4c8.fundInvestment) == null ? undefined : _0x17f183.fund) == null ? undefined : _0x2d5be2.id
           }));
         }
@@ -33377,7 +33381,7 @@ const nq = () => {
   const {
     state: _0x4b01f4
   } = a84_0x128389();
-  const _0x3a9160 = (_0x4b01f4 == null ? undefined : _0x4b01f4.referrer) !== (Ve == null ? undefined : Ve.box.wealth.fundDetail);
+  const _0x3a9160 = (_0x4b01f4 == null ? undefined : _0x4b01f4.referrer) !== (AppRoutes == null ? undefined : AppRoutes.box.wealth.fundDetail);
   return <AO header={{
     title: (_0x381789 = _0x37960e == null ? undefined : _0x37960e.entity) == null ? undefined : _0x381789.name
   }}><NR isFullScreen={true} isShown={_0xa2521a} />{!_0xa2521a && <a84_0x593ff2.Fragment>{_0x37960e && <a84_0x4a7d50.MarkDownParser className={bt([eq, "px-4"])} markdownText={(_0x6a6b10 = _0x37960e == null ? undefined : _0x37960e.generalTermsMarkdown) == null ? undefined : _0x6a6b10.replaceAll(/'/g, "")} />}{_0x3a9160 && <a84_0x4a7d50.FixedBottomBox><div className="flex w-full"><span className="grow"><_Component6 {...tq.agree} /></span><a84_0x4a7d50.Toggle onChange={_0x2afffc} isChecked={_0x309ede} /></div><a84_0x4a7d50.Button isLoading={_0x2d37c3} className="mt-4" isDisabled={!_0x309ede} onClick={_0xe0ea11} title={_0x33f176(tq.create)} /></a84_0x4a7d50.FixedBottomBox>}</a84_0x593ff2.Fragment>}{_0x3a9160 && <a84_0x4a7d50.FixedBottomBox><div className="flex w-full"><span className="grow"><_Component6 {...tq.agree} /></span><a84_0x4a7d50.Toggle onChange={_0x2afffc} isChecked={_0x309ede} /></div><a84_0x4a7d50.Button isLoading={_0x2d37c3} className="mt-4" isDisabled={!_0x309ede} onClick={_0xe0ea11} title={_0x33f176(tq.create)} /></a84_0x4a7d50.FixedBottomBox>}</AO>;
@@ -33947,7 +33951,7 @@ const Sq = () => {
           _0x46dbe2();
         }} isLoading={_0x269753.isLoading} />}<a84_0x4a7d50.Button title={_0x3a3316(_0x255420.submit)} onClick={async () => {
           if (_0x3df223 === "buy") {
-            return _0x38cace.push(Ct(Ve.box.fund.commodity.selectSource, {
+            return _0x38cace.push(Ct(AppRoutes.box.fund.commodity.selectSource, {
               id: _0x25034d,
               action: _0x3df223
             }));
@@ -33969,8 +33973,8 @@ const Sq = () => {
             }
             Co.goldBoxSellConfirm();
             _0x4e2edb({
-              currentPattern: Ve.box.fund.commodity.draft,
-              targetPattern: _0x3df223 === "sell" ? Ve.box.fund.commodity.detail : Ve.box.list
+              currentPattern: AppRoutes.box.fund.commodity.draft,
+              targetPattern: _0x3df223 === "sell" ? AppRoutes.box.fund.commodity.detail : AppRoutes.box.list
             });
           } catch (_0x10d402) {
             a84_0x4a7d50.toast({
@@ -34256,14 +34260,14 @@ const Gq = ({
           var _0x3a825a;
           if (_0x575f55.id !== (_0x5691f8 == null ? undefined : _0x5691f8.id)) {
             if (((_0x48dafd = _0x575f55.status) == null ? undefined : _0x48dafd.rawValue) === wt.ACCOUNT_PROFILE_STATUS_WAITING) {
-              _0x58f791.push(Ct(Ve.settings.multiAccount.businessAccountResult, {
+              _0x58f791.push(Ct(AppRoutes.settings.multiAccount.businessAccountResult, {
                 accountProfileId: _0x575f55.id,
                 accountName: _0x575f55.name,
                 backNavigationAccountName: ((_0x3a825a = _0x5691f8 == null ? undefined : _0x5691f8.type) == null ? undefined : _0x3a825a.rawValue) === kt.ACCOUNT_PROFILE_TYPE_PERSONAL_BUSINESS ? _0x5691f8 == null ? undefined : _0x5691f8.name : _0x31cb5e(qq.personal),
                 backNavigationUrl: encodeURIComponent(_0x3c4776.pathname)
               }));
             } else {
-              _0x58f791.push(Ct(Ve.switchAccount.root, {
+              _0x58f791.push(Ct(AppRoutes.switchAccount.root, {
                 profile_id: _0x575f55.id
               }));
             }
@@ -34280,7 +34284,7 @@ const Gq = ({
         if (_0x145782) {
           if (_0x145782 == null ? undefined : _0x145782.enabled) {
             Co.businessAccountRequestStarted();
-            _0x58f791.push(Ct(Ve.settings.multiAccount.businessIntro, {
+            _0x58f791.push(Ct(AppRoutes.settings.multiAccount.businessIntro, {
               backNavigationUrl: encodeURIComponent(_0x3c4776.pathname)
             }));
             return;
@@ -34615,7 +34619,7 @@ const UV = () => {
     version: _0x4e8c5f,
     bundleId: _0x205f2f
   } = qe;
-  pC(Ve.login.root);
+  pC(AppRoutes.login.root);
   (({
     version: _0x65ed5e,
     bundleId: _0x15d64a
@@ -34666,16 +34670,16 @@ const UV = () => {
     a84_0x504ae4.useEffect(() => {
       if (_0x4718c4 && (_0x4718c4 == null ? undefined : _0x4718c4.modal) === "awareness-alert" && !_0x3c3b0a.current) {
         _0x3c3b0a.current = true;
-        _0x372273.push(Ve.userAwareness.root, {
+        _0x372273.push(AppRoutes.userAwareness.root, {
           from: _0x56fae1.pathname
         });
       }
     }, [_0x4718c4]);
   })();
   Cq();
-  return <_Component58><_Component57 path={Ve.userAwareness.root} component={mV} /><_Component57 path={Ve.dashboard.root} component={vV} /><_Component57 path={Ve.transfer.root} component={pV} /><_Component57 path={Ve.cheque.root} component={yV} /><_Component57 path={Ve.topUp.root} component={fV} /><_Component57 path={Ve.payment.root} component={uV} /><_Component57 path={Ve.cashback.root} component={lV} /><_Component57 path={Ve.settings.root} component={gV} /><_Component57 path={Ve.switchAccount.root} component={EV} /><_Component57 path={Ve.loan.root} component={AV} /><_Component57 path={Ve.card.root} component={dV} /><_Component57 path={Ve.directDebit.root} component={bV} /><_Component57 path={Ve.inbox.root} component={SV} /><_Component57 path={Ve.forceActions.root} component={hV} /><_Component57 path={Ve.reopenAccount.root} component={IV} /><_Component57 path={Ve.bluQR.root} component={NV} /><_Component57 path={Ve.achievement.root} component={CV} /><_Component57 path={Ve.box.root} component={xV} /><_Component57 path={Ve.onboarding.root} component={RV} /><_Component57 path={Ve.vehicleServices.root} component={cV} /><_Component57 path={Ve.groupBill.root} component={DV} /><_Component57 path={Ve.feedback.root} component={PV} /><_Component57 path={Ve.chat.private} component={wV} /><_Component57 path={Ve.junior.root} component={OV} /></_Component58>;
+  return <_Component58><_Component57 path={AppRoutes.userAwareness.root} component={mV} /><_Component57 path={AppRoutes.dashboard.root} component={vV} /><_Component57 path={AppRoutes.transfer.root} component={pV} /><_Component57 path={AppRoutes.cheque.root} component={yV} /><_Component57 path={AppRoutes.topUp.root} component={fV} /><_Component57 path={AppRoutes.payment.root} component={uV} /><_Component57 path={AppRoutes.cashback.root} component={lV} /><_Component57 path={AppRoutes.settings.root} component={gV} /><_Component57 path={AppRoutes.switchAccount.root} component={EV} /><_Component57 path={AppRoutes.loan.root} component={AV} /><_Component57 path={AppRoutes.card.root} component={dV} /><_Component57 path={AppRoutes.directDebit.root} component={bV} /><_Component57 path={AppRoutes.inbox.root} component={SV} /><_Component57 path={AppRoutes.forceActions.root} component={hV} /><_Component57 path={AppRoutes.reopenAccount.root} component={IV} /><_Component57 path={AppRoutes.bluQR.root} component={NV} /><_Component57 path={AppRoutes.achievement.root} component={CV} /><_Component57 path={AppRoutes.box.root} component={xV} /><_Component57 path={AppRoutes.onboarding.root} component={RV} /><_Component57 path={AppRoutes.vehicleServices.root} component={cV} /><_Component57 path={AppRoutes.groupBill.root} component={DV} /><_Component57 path={AppRoutes.feedback.root} component={PV} /><_Component57 path={AppRoutes.chat.private} component={wV} /><_Component57 path={AppRoutes.junior.root} component={OV} /></_Component58>;
 };
-const LV = () => <_Component58><_Component exact={true} path={Ve.intro} render={() => Yn().isSignUpLandingPageHide() ? <_Component2 to={Ve.login.root} /> : <_Component60 defaultTheme="light"><_Component59 /></_Component60>} /><_Component path={Ve.login.root} component={oV} /><_Component path={Ve.chat.guest} component={wV} /><_Component exact={true} path={Ve.iosVersionSupportError} component={_Component63} /><_Component path={Ve.recovery.root} component={sV} /><_Component path={Ve.oneClickPayment.root} component={kV} /><_Component path={Ve.DeepLinkGuidePage} component={pR} /><_Component57 path={Ve.deviceVerify.root} component={_V} /><_Component57 path={Ve.kyc.root} render={() => Cl() ? <_Component2 to={Ve.iosVersionSupportError} /> : <TV />} /><_Component exact={true} path={Ve.root} /><_Component component={UV} /></_Component58>;
+const LV = () => <_Component58><_Component exact={true} path={AppRoutes.intro} render={() => Yn().isSignUpLandingPageHide() ? <_Component2 to={AppRoutes.login.root} /> : <_Component60 defaultTheme="light"><_Component59 /></_Component60>} /><_Component path={AppRoutes.login.root} component={oV} /><_Component path={AppRoutes.chat.guest} component={wV} /><_Component exact={true} path={AppRoutes.iosVersionSupportError} component={_Component63} /><_Component path={AppRoutes.recovery.root} component={sV} /><_Component path={AppRoutes.oneClickPayment.root} component={kV} /><_Component path={AppRoutes.DeepLinkGuidePage} component={pR} /><_Component57 path={AppRoutes.deviceVerify.root} component={_V} /><_Component57 path={AppRoutes.kyc.root} render={() => Cl() ? <_Component2 to={AppRoutes.iosVersionSupportError} /> : <TV />} /><_Component exact={true} path={AppRoutes.root} /><_Component component={UV} /></_Component58>;
 const MV = a84_0x46b00b.isIOS ? <_Component61 /> : <_Component62 />;
 const BV = () => {
   const {
@@ -34750,7 +34754,7 @@ const BV = () => {
     (_0x2b6350 => {
       hl.value = _0x2b6350;
     })(_0x3cd5bc);
-    if (window.location.pathname === Ve.externals.downloadAppFile) {
+    if (window.location.pathname === AppRoutes.externals.downloadAppFile) {
       window.location.href = "https://blubank.sb24.ir/download/";
     }
   }, []);
@@ -34784,13 +34788,13 @@ const BV = () => {
     const _0x4394b5 = a84_0x504ae4.useRef(null);
     a84_0x504ae4.useLayoutEffect(() => {
       if (PC.length === 1) {
-        if (_0x4a4f24.pathname !== Ve.root) {
+        if (_0x4a4f24.pathname !== AppRoutes.root) {
           _0x4394b5.current = _0x4a4f24;
-          _0x13cafc.replace(Ve.root);
+          _0x13cafc.replace(AppRoutes.root);
         } else if (_0x4394b5.current) {
           _0x13cafc.push(_0x4394b5.current);
         } else {
-          _0x13cafc.push(Ve.intro);
+          _0x13cafc.push(AppRoutes.intro);
         }
       }
     }, [_0x4a4f24, _0x13cafc]);
@@ -34843,8 +34847,8 @@ const BV = () => {
     }, []);
   })({
     pathMap: GP,
-    rootPath: Ve.login.root,
-    deepLinkPath: Ve.DeepLinkGuidePage
+    rootPath: AppRoutes.login.root,
+    deepLinkPath: AppRoutes.DeepLinkGuidePage
   });
   const _0x466d9a = Number(a84_0x46b00b.browserVersion);
   if (a84_0x46b00b.isIOS && _0x466d9a < 13) {
@@ -50198,5 +50202,4 @@ a84_0x2ccb2d.createRoot(jV).render(<_Component68 client={Be}><_Component67 local
       value: "چهارشنبه"
     }]
   }}><_Component66 options={D_} flagsmith={a84_0x281d03}><_Component60 themeTargetNode={document.documentElement}><PO><a84_0x5139ec.Suspense fallback={<div dir="rtl" className="fixed inset-0"><a84_0x4a7d50.Loading isShown={true} isFullScreen={true} title="در حال دریافت اطلاعات..." /></div>}><_Component65><BV /><a84_0x4a7d50.ToastContainer className="rtl" /></_Component65></a84_0x5139ec.Suspense></PO></_Component60></_Component66>{false}</_Component67></_Component68>);
-export { Ct as $, AO as A, Nx as B, Pt as C, fL as D, Po as E, uv as F, cv as G, yv as H, QC as I, mv as J, pv as K, dv as L, Rx as M, bt as N, si as O, _Component57 as P, wl as Q, Wn as R, kl as S, fa as T, __ as U, CC as V, Rl as W, rt as X, iV as Y, _Component37 as Z, px as _, Qn as a, SL as a$, _x as a0, MO as a1, qO as a2, Dk as a3, Co as a4, ot as a5, _Component4 as a6, za as a7, La as a8, Z_ as a9, qL as aA, _n as aB, GO as aC, cx as aD, $B as aE, HB as aF, _Component45 as aG, PC as aH, zo as aI, XB as aJ, JB as aK, ZB as aL, QB as aM, KB as aN, _Component16 as aO, Ol as aP, ej as aQ, mx as aR, nC as aS, iC as aT, ml as aU, In as aV, CL as aW, LL as aX, xL as aY, RL as aZ, AL as a_, F_ as aa, xt as ab, Pk as ac, q_ as ad, NR as ae, OR as af, _R as ag, yx as ah, Be as ai, L_ as aj, w_ as ak, YB as al, tj as am, Ta as an, da as ao, uC as ap, Fx as aq, Bx as ar, Tx as as, ft as at, nj as au, gt as av, zB as aw, u_ as ax, ox as ay, WB as az, _a as b, ak as b$, IL as b0, NL as b1, _L as b2, bn as b3, kt as b4, jL as b5, OO as b6, _Component15 as b7, ux as b8, HL as b9, iy as bA, ny as bB, my as bC, py as bD, cy as bE, ly as bF, Lm as bG, Um as bH, ay as bI, ty as bJ, _m as bK, Nm as bL, Om as bM, Pm as bN, Dm as bO, Rm as bP, xm as bQ, Cm as bR, Ma as bS, At as bT, MN as bU, XO as bV, ZO as bW, $N as bX, JO as bY, nk as bZ, GN as b_, WL as ba, QL as bb, dx as bc, pt as bd, Yo as be, Go as bf, VL as bg, o_ as bh, qx as bi, KC as bj, ML as bk, GL as bl, je as bm, _l as bn, Q_ as bo, _Component21 as bp, FL as bq, JL as br, oy as bs, ry as bt, vy as bu, yy as bv, dy as bw, uy as bx, wm as by, km as bz, qe as c, lS as c$, tk as c0, ek as c1, ia as c2, VN as c3, ik as c4, YN as c5, _Component0 as c6, ut as c7, Ck as c8, Yn as c9, gB as cA, Lt as cB, It as cC, eB as cD, fB as cE, hB as cF, Nt as cG, FR as cH, AB as cI, SB as cJ, Cn as cK, _Component19 as cL, hC as cM, EC as cN, rB as cO, oB as cP, lB as cQ, cn as cR, on as cS, $a as cT, cB as cU, oC as cV, NS as cW, IS as cX, mS as cY, pS as cZ, cS as c_, Nn as ca, an as cb, fv as cc, bv as cd, Tv as ce, hv as cf, gv as cg, vv as ch, hx as ci, la as cj, ZM as ck, XM as cl, $M as cm, cC as cn, WM as co, rn as cp, sn as cq, Bo as cr, wt as cs, gR as ct, aB as cu, xn as cv, JM as cw, tB as cx, ln as cy, sB as cz, p_ as d, xa as d$, dS as d0, uS as d1, vS as d2, yS as d3, fS as d4, bS as d5, SS as d6, AS as d7, TS as d8, hS as d9, Vt as dA, Xt as dB, An as dC, $t as dD, Zt as dE, ea as dF, ta as dG, Gt as dH, Dt as dI, Yx as dJ, Ia as dK, Sn as dL, Na as dM, YO as dN, Ex as dO, HD as dP, GD as dQ, Mt as dR, ID as dS, Sa as dT, El as dU, Uk as dV, wk as dW, jk as dX, Lk as dY, Bk as dZ, qt as d_, oS as da, rS as db, sS as dc, iS as dd, ES as de, gS as df, $C as dg, CB as dh, _B as di, kB as dj, xB as dk, DB as dl, RB as dm, PB as dn, St as dp, OB as dq, ZC as dr, ri as ds, a_ as dt, Xx as du, fl as dv, Al as dw, Kx as dx, Aa as dy, Bt as dz, tM as e, VR as e$, Mk as e0, Fk as e1, Ft as e2, qk as e3, Ea as e4, vn as e5, pn as e6, Rt as e7, gn as e8, Tn as e9, vM as eA, hM as eB, TM as eC, dM as eD, uM as eE, Mo as eF, ER as eG, XC as eH, Tt as eI, fM as eJ, NM as eK, _M as eL, xM as eM, wM as eN, UM as eO, LM as eP, Fo as eQ, rC as eR, MC as eS, nR as eT, Kk as eU, $k as eV, Qk as eW, IO as eX, SO as eY, c_ as eZ, WO as e_, zn as ea, Xn as eb, $n as ec, Jn as ed, pN as ee, dN as ef, yN as eg, mN as eh, lN as ei, oN as ej, R_ as ek, $e as el, Ln as em, Bn as en, jo as eo, LO as ep, FC as eq, Gq as er, oi as es, cM as et, lM as eu, xN as ev, P_ as ew, rx as ex, sx as ey, yM as ez, aM as f, Ew as f$, SM as f0, PM as f1, IM as f2, DM as f3, Gx as f4, zx as f5, Uo as f6, wo as f7, CN as f8, Fq as f9, zD as fA, MD as fB, DD as fC, PD as fD, xD as fE, RD as fF, gl as fG, jD as fH, VD as fI, YD as fJ, uO as fK, lO as fL, jM as fM, gx as fN, FM as fO, qD as fP, qM as fQ, n_ as fR, GM as fS, VM as fT, ZP as fU, HP as fV, $P as fW, WP as fX, QP as fY, Va as fZ, hw as f_, y_ as fa, Qx as fb, _v as fc, Cv as fd, Iv as fe, Nv as ff, Av as fg, Sv as fh, dl as fi, nl as fj, r_ as fk, pT as fl, dT as fm, rT as fn, sT as fo, iT as fp, nT as fq, di as fr, ei as fs, ti as ft, V_ as fu, sC as fv, Ya as fw, Ga as fx, Fa as fy, zk as fz, YP as g, e_ as g$, Zk as g0, Ba as g1, Rw as g2, xw as g3, Dw as g4, nx as g5, dw as g6, Lw as g7, rU as g8, dU as g9, Vw as gA, zw as gB, Yw as gC, Hw as gD, Fw as gE, Mw as gF, Qw as gG, Gw as gH, Ww as gI, aU as gJ, eU as gK, LU as gL, bw as gM, eC as gN, RU as gO, TU as gP, CU as gQ, lU as gR, Jk as gS, HU as gT, Vx as gU, ew as gV, tw as gW, Sw as gX, aL as gY, pU as gZ, oU as g_, cU as ga, uU as gb, aw as gc, iw as gd, mU as ge, AU as gf, nw as gg, Pw as gh, _O as gi, $o as gj, Tw as gk, MU as gl, _Component38 as gm, FU as gn, qU as go, $w as gp, jw as gq, lt as gr, OU as gs, Xw as gt, nU as gu, Kw as gv, Jw as gw, Zw as gx, tU as gy, qw as gz, _Component5 as h, aP as h$, _w as h0, Iw as h1, Nw as h2, vw as h3, SU as h4, IU as h5, dL as h6, vL as h7, GR as h8, ex as h9, MA as hA, LA as hB, UA as hC, QA as hD, WA as hE, HA as hF, zA as hG, YA as hH, GA as hI, VA as hJ, qA as hK, FA as hL, jA as hM, PP as hN, WD as hO, RP as hP, OP as hQ, KD as hR, XD as hS, QD as hT, $D as hU, JD as hV, iP as hW, fP as hX, ZD as hY, eP as hZ, tP as h_, IT as ha, ST as hb, bT as hc, TT as hd, hT as he, ET as hf, AT as hg, fT as hh, Vo as hi, Jx as hj, DL as hk, wB as hl, MB as hm, qB as hn, FB as ho, Zo as hp, rc as hq, Hn as hr, PA as hs, DA as ht, wA as hu, kA as hv, ix as hw, _p as hx, Np as hy, BA as hz, Cl as i, hI as i$, nP as i0, rP as i1, oP as i2, cP as i3, uP as i4, mP as i5, dP as i6, rO as i7, kP as i8, EF as i9, wP as iA, AP as iB, $x as iC, B_ as iD, SC as iE, nq as iF, qP as iG, _P as iH, BP as iI, NP as iJ, sq as iK, cq as iL, UP as iM, Wq as iN, CP as iO, _Component55 as iP, FP as iQ, qF as iR, IP as iS, BF as iT, gq as iU, Eq as iV, vq as iW, VP as iX, Tq as iY, VF as iZ, Sq as i_, LP as ia, jP as ib, IF as ic, BC as id, _F as ie, RF as ig, Ot as ih, _C as ii, DF as ij, lx as ik, kF as il, vx as im, gC as io, GF as ip, bP as iq, wF as ir, MP as is, $F as it, JF as iu, HF as iv, ZF as iw, WF as ix, XF as iy, i_ as iz, t_ as j, Bj as j$, EI as j0, _I as j1, NI as j2, gI as j3, vI as j4, II as j5, SI as j6, eI as j7, ZS as j8, JS as j9, HI as jA, zI as jB, YI as jC, pj as jD, lj as jE, bj as jF, xj as jG, Tj as jH, fj as jI, Sj as jJ, Aj as jK, TC as jL, Cj as jM, Rj as jN, Pj as jO, Oj as jP, kj as jQ, Dj as jR, Ij as jS, bC as jT, AM as jU, Hx as jV, mj as jW, yj as jX, qN as jY, Lj as jZ, Mj as j_, XS as ja, yI as jb, mI as jc, QS as jd, WS as je, rI as jf, sI as jg, AI as jh, fI as ji, bI as jj, TI as jk, iI as jl, nI as jm, aI as jn, tI as jo, xI as jp, CI as jq, uI as jr, cI as js, lI as jt, oI as ju, $S as jv, KS as jw, pI as jx, dI as jy, WI as jz, iM as k, qj as k0, E_ as k1, Gj as k2, Qj as k3, Vj as k4, Hj as k5, zj as k6, Yj as k7, Wj as k8, dF as k9, Ht as kA, zt as kB, Wt as kC, Qt as kD, Kt as kE, Jt as kF, DO as kG, Ml as kH, Bl as kI, Ll as kJ, oj as kK, ij as kL, mt as kM, Kq as kN, sj as kO, v_ as kP, Do as kQ, g_ as kR, Gn as kS, ko as kT, it as kU, Nl as kV, l_ as kW, Kn as kX, hn as kY, ax as ka, jN as kb, QN as kc, _N as kd, Oq as ke, RR as kf, DR as kg, JN as kh, tl as ki, ey as kj, Zm as kk, Jm as kl, Xm as km, $m as kn, Km as ko, Qm as kp, Wm as kq, Ym as kr, Gm as ks, Hm as kt, zm as ku, Vm as kv, qm as kw, jm as kx, Bm as ky, Yt as kz, sM as l, nM as m, NO as n, H_ as o, IC as p, wC as q, Ve as r, QO as s, Oo as t, ni as u, m_ as v, st as w, jR as x, Lo as y, AC as z };
-//# sourceMappingURL=index-2eceabf9.js.map
+export { Ct as $, AO as A, Nx as B, Pt as C, fL as D, Po as E, uv as F, cv as G, yv as H, QC as I, mv as J, pv as K, dv as L, Rx as M, bt as N, si as O, _Component57 as P, wl as Q, Wn as R, kl as S, fa as T, ApiService as U, CC as V, Rl as W, rt as X, iV as Y, _Component37 as Z, px as _, Qn as a, SL as a$, _x as a0, MO as a1, qO as a2, Dk as a3, Co as a4, ot as a5, _Component4 as a6, za as a7, La as a8, Z_ as a9, qL as aA, _n as aB, GO as aC, cx as aD, $B as aE, HB as aF, _Component45 as aG, PC as aH, zo as aI, XB as aJ, JB as aK, ZB as aL, QB as aM, KB as aN, _Component16 as aO, Ol as aP, ej as aQ, mx as aR, nC as aS, iC as aT, ml as aU, In as aV, CL as aW, LL as aX, xL as aY, RL as aZ, AL as a_, F_ as aa, xt as ab, Pk as ac, q_ as ad, NR as ae, OR as af, _R as ag, yx as ah, Be as ai, L_ as aj, w_ as ak, YB as al, tj as am, Ta as an, da as ao, uC as ap, Fx as aq, Bx as ar, Tx as as, ft as at, nj as au, gt as av, zB as aw, u_ as ax, ox as ay, WB as az, _a as b, ak as b$, IL as b0, NL as b1, _L as b2, bn as b3, kt as b4, jL as b5, OO as b6, _Component15 as b7, ux as b8, HL as b9, iy as bA, ny as bB, my as bC, py as bD, cy as bE, ly as bF, Lm as bG, Um as bH, ay as bI, ty as bJ, _m as bK, Nm as bL, Om as bM, Pm as bN, Dm as bO, Rm as bP, xm as bQ, Cm as bR, Ma as bS, At as bT, MN as bU, XO as bV, ZO as bW, $N as bX, JO as bY, nk as bZ, GN as b_, WL as ba, QL as bb, dx as bc, pt as bd, Yo as be, Go as bf, VL as bg, o_ as bh, qx as bi, KC as bj, ML as bk, GL as bl, je as bm, _l as bn, Q_ as bo, _Component21 as bp, FL as bq, JL as br, oy as bs, ry as bt, vy as bu, yy as bv, dy as bw, uy as bx, wm as by, km as bz, qe as c, lS as c$, tk as c0, ek as c1, ia as c2, VN as c3, ik as c4, YN as c5, _Component0 as c6, ut as c7, Ck as c8, Yn as c9, gB as cA, Lt as cB, It as cC, eB as cD, fB as cE, hB as cF, Nt as cG, FR as cH, AB as cI, SB as cJ, Cn as cK, _Component19 as cL, hC as cM, EC as cN, rB as cO, oB as cP, lB as cQ, cn as cR, on as cS, $a as cT, cB as cU, oC as cV, NS as cW, IS as cX, mS as cY, pS as cZ, cS as c_, Nn as ca, an as cb, fv as cc, bv as cd, Tv as ce, hv as cf, gv as cg, vv as ch, hx as ci, la as cj, ZM as ck, XM as cl, $M as cm, cC as cn, WM as co, rn as cp, sn as cq, Bo as cr, wt as cs, gR as ct, aB as cu, xn as cv, JM as cw, tB as cx, ln as cy, sB as cz, p_ as d, xa as d$, dS as d0, uS as d1, vS as d2, yS as d3, fS as d4, bS as d5, SS as d6, AS as d7, TS as d8, hS as d9, Vt as dA, Xt as dB, An as dC, $t as dD, Zt as dE, ea as dF, ta as dG, Gt as dH, Dt as dI, Yx as dJ, Ia as dK, Sn as dL, Na as dM, YO as dN, Ex as dO, HD as dP, GD as dQ, Mt as dR, ID as dS, Sa as dT, El as dU, Uk as dV, wk as dW, jk as dX, Lk as dY, Bk as dZ, qt as d_, oS as da, rS as db, sS as dc, iS as dd, ES as de, gS as df, $C as dg, CB as dh, _B as di, kB as dj, xB as dk, DB as dl, RB as dm, PB as dn, St as dp, OB as dq, ZC as dr, ri as ds, a_ as dt, Xx as du, fl as dv, Al as dw, Kx as dx, Aa as dy, Bt as dz, tM as e, VR as e$, Mk as e0, Fk as e1, Ft as e2, qk as e3, Ea as e4, vn as e5, pn as e6, Rt as e7, gn as e8, Tn as e9, vM as eA, hM as eB, TM as eC, dM as eD, uM as eE, Mo as eF, ER as eG, XC as eH, Tt as eI, fM as eJ, NM as eK, _M as eL, xM as eM, wM as eN, UM as eO, LM as eP, Fo as eQ, rC as eR, MC as eS, nR as eT, Kk as eU, $k as eV, Qk as eW, IO as eX, SO as eY, c_ as eZ, WO as e_, zn as ea, Xn as eb, $n as ec, Jn as ed, pN as ee, dN as ef, yN as eg, mN as eh, lN as ei, oN as ej, R_ as ek, $e as el, Ln as em, Bn as en, jo as eo, LO as ep, FC as eq, Gq as er, oi as es, cM as et, lM as eu, xN as ev, P_ as ew, rx as ex, sx as ey, yM as ez, aM as f, Ew as f$, SM as f0, PM as f1, IM as f2, DM as f3, Gx as f4, zx as f5, Uo as f6, wo as f7, CN as f8, Fq as f9, zD as fA, MD as fB, DD as fC, PD as fD, xD as fE, RD as fF, gl as fG, jD as fH, VD as fI, YD as fJ, uO as fK, lO as fL, jM as fM, gx as fN, FM as fO, qD as fP, qM as fQ, n_ as fR, GM as fS, VM as fT, ZP as fU, HP as fV, $P as fW, WP as fX, QP as fY, Va as fZ, hw as f_, y_ as fa, Qx as fb, _v as fc, Cv as fd, Iv as fe, Nv as ff, Av as fg, Sv as fh, dl as fi, nl as fj, r_ as fk, pT as fl, dT as fm, rT as fn, sT as fo, iT as fp, nT as fq, di as fr, ei as fs, ti as ft, V_ as fu, sC as fv, Ya as fw, Ga as fx, Fa as fy, zk as fz, YP as g, e_ as g$, Zk as g0, Ba as g1, Rw as g2, xw as g3, Dw as g4, nx as g5, dw as g6, Lw as g7, rU as g8, dU as g9, Vw as gA, zw as gB, Yw as gC, Hw as gD, Fw as gE, Mw as gF, Qw as gG, Gw as gH, Ww as gI, aU as gJ, eU as gK, LU as gL, bw as gM, eC as gN, RU as gO, TU as gP, CU as gQ, lU as gR, Jk as gS, HU as gT, Vx as gU, ew as gV, tw as gW, Sw as gX, aL as gY, pU as gZ, oU as g_, cU as ga, uU as gb, aw as gc, iw as gd, mU as ge, AU as gf, nw as gg, Pw as gh, _O as gi, $o as gj, Tw as gk, MU as gl, _Component38 as gm, FU as gn, qU as go, $w as gp, jw as gq, lt as gr, OU as gs, Xw as gt, nU as gu, Kw as gv, Jw as gw, Zw as gx, tU as gy, qw as gz, _Component5 as h, aP as h$, _w as h0, Iw as h1, Nw as h2, vw as h3, SU as h4, IU as h5, dL as h6, vL as h7, GR as h8, ex as h9, MA as hA, LA as hB, UA as hC, QA as hD, WA as hE, HA as hF, zA as hG, YA as hH, GA as hI, VA as hJ, qA as hK, FA as hL, jA as hM, PP as hN, WD as hO, RP as hP, OP as hQ, KD as hR, XD as hS, QD as hT, $D as hU, JD as hV, iP as hW, fP as hX, ZD as hY, eP as hZ, tP as deriveKeyFromPassword, IT as ha, ST as hb, bT as hc, TT as hd, hT as he, ET as hf, AT as hg, fT as hh, Vo as hi, Jx as hj, DL as hk, wB as hl, MB as hm, qB as hn, FB as ho, Zo as hp, rc as hq, Hn as hr, PA as hs, DA as ht, wA as hu, kA as hv, ix as hw, _p as hx, Np as hy, BA as hz, Cl as i, hI as i$, nP as i0, rP as i1, oP as i2, cP as i3, uP as i4, mP as i5, dP as i6, rO as i7, kP as i8, EF as i9, wP as iA, AP as iB, $x as iC, B_ as iD, SC as iE, nq as iF, qP as iG, _P as iH, BP as iI, NP as iJ, sq as iK, cq as iL, UP as iM, Wq as iN, CP as iO, _Component55 as iP, FP as iQ, qF as iR, IP as iS, BF as iT, gq as iU, Eq as iV, vq as iW, VP as iX, Tq as iY, VF as iZ, Sq as i_, LP as ia, jP as ib, IF as ic, BC as id, _F as ie, RF as ig, Ot as ih, _C as ii, DF as ij, lx as ik, kF as il, vx as im, gC as io, GF as ip, bP as iq, wF as ir, MP as is, $F as it, JF as iu, HF as iv, ZF as iw, WF as ix, XF as iy, i_ as iz, t_ as j, Bj as j$, EI as j0, _I as j1, NI as j2, gI as j3, vI as j4, II as j5, SI as j6, eI as j7, ZS as j8, JS as j9, HI as jA, zI as jB, YI as jC, pj as jD, lj as jE, bj as jF, xj as jG, Tj as jH, fj as jI, Sj as jJ, Aj as jK, TC as jL, Cj as jM, Rj as jN, Pj as jO, Oj as jP, kj as jQ, Dj as jR, Ij as jS, bC as jT, AM as jU, Hx as jV, mj as jW, yj as jX, qN as jY, Lj as jZ, Mj as j_, XS as ja, yI as jb, mI as jc, QS as jd, WS as je, rI as jf, sI as jg, AI as jh, fI as ji, bI as jj, TI as jk, iI as jl, nI as jm, aI as jn, tI as jo, xI as jp, CI as jq, uI as jr, cI as js, lI as jt, oI as ju, $S as jv, KS as jw, pI as jx, dI as jy, WI as jz, iM as k, qj as k0, E_ as k1, Gj as k2, Qj as k3, Vj as k4, Hj as k5, zj as k6, Yj as k7, Wj as k8, dF as k9, Ht as kA, zt as kB, Wt as kC, Qt as kD, Kt as kE, Jt as kF, DO as kG, Ml as kH, Bl as kI, Ll as kJ, oj as kK, ij as kL, mt as kM, Kq as kN, sj as kO, v_ as kP, Do as kQ, g_ as kR, Gn as kS, ko as kT, it as kU, Nl as kV, l_ as kW, Kn as kX, hn as kY, ax as ka, jN as kb, QN as kc, _N as kd, Oq as ke, RR as kf, DR as kg, JN as kh, tl as ki, ey as kj, Zm as kk, Jm as kl, Xm as km, $m as kn, Km as ko, Qm as kp, Wm as kq, Ym as kr, Gm as ks, Hm as kt, zm as ku, Vm as kv, qm as kw, jm as kx, Bm as ky, Yt as kz, sM as l, nM as m, NO as n, H_ as o, IC as p, wC as q, AppRoutes as r, QO as s, Oo as t, ni as u, m_ as v, st as w, jR as x, Lo as y, AC as z };
